@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KING-MD — pairing code</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#05050b;
+  --bg-2:#090b18;
+  --panel:#0d1020;
+  --line:#25204a;
+  --purple:#9b5cff;
+  --purple-2:#6d35ff;
+  --blue:#25a7ff;
+  --text:#f2f0ff;
+  --muted:#9698b5;
+  --ok:#6ee7b7;
+  --err:#ff6b81;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:
+    radial-gradient(circle at 50% -10%, rgba(109,53,255,.24) 0%, transparent 38%),
+    radial-gradient(circle at 100% 100%, rgba(37,167,255,.10) 0%, transparent 35%),
+    var(--bg);
+  color:var(--text);
+  font-family:'Space Grotesk', sans-serif;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:32px 18px;
+  overflow-x:hidden;
+}
+.sky{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+}
+.sky span{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:#fff;
+  border-radius:50%;
+  opacity:.5;
+  animation:twinkle 4s ease-in-out infinite;
+}
+@keyframes twinkle{
+  0%,100%{opacity:.15;}
+  50%{opacity:.85;}
+}
+.card{
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-width:440px;
+  background:
+    linear-gradient(180deg, rgba(16,15,35,.96) 0%, rgba(7,9,20,.98) 100%);
+  border:1px solid rgba(145,91,255,.30);
+  border-radius:24px;
+  padding:38px 32px 30px;
+  box-shadow:
+    0 30px 90px -35px rgba(0,0,0,.9),
+    0 0 45px rgba(109,53,255,.10),
+    inset 0 1px 0 rgba(255,255,255,.04);
+  animation:cardFloat 5s ease-in-out infinite;
+  overflow:hidden;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  padding:1px;
+  background:linear-gradient(135deg, rgba(155,92,255,.65), rgba(37,167,255,.35), transparent 55%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  pointer-events:none;
+}
+
+.card::after{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  left:50%;
+  top:-125px;
+  transform:translateX(-50%);
+  background:rgba(109,53,255,.18);
+  filter:blur(45px);
+  border-radius:50%;
+  pointer-events:none;
+}
+
+@keyframes cardFloat{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
+}
+.royal-mark{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:16px;
+  height:56px;
+}
+
+.crown{
+  font-family:'Cinzel', serif;
+  font-size:31px;
+  line-height:1;
+  color:#c89cff;
+  text-shadow:
+    0 0 8px rgba(155,92,255,.95),
+    0 0 24px rgba(109,53,255,.65);
+  animation:crownPulse 3s ease-in-out infinite;
+}
+
+.royal-line{
+  width:76px;
+  height:1px;
+  margin-top:8px;
+  background:linear-gradient(90deg, transparent, var(--purple), var(--blue), transparent);
+  box-shadow:0 0 12px rgba(155,92,255,.7);
+}
+
+@keyframes crownPulse{
+  0%,100%{transform:translateY(0) scale(1);opacity:.9;}
+  50%{transform:translateY(-3px) scale(1.06);opacity:1;}
+}
+
+h1{
+  font-family:'Cinzel', serif;
+  font-size:28px;
+  letter-spacing:.16em;
+  text-align:center;
+  margin:0 0 5px;
+  background:linear-gradient(90deg, #cba4ff, #8b5cff, #48b9ff);
+
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+.tagline{
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  letter-spacing:.04em;
+  margin-bottom:30px;
+}
+label{
+  display:block;
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:8px;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+}
+.input-row{
+  display:flex;
+  gap:10px;
+}
+input[type="text"]{
+  flex:1;
+  background:var(--bg);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:14px 16px;
+  color:var(--text);
+  font-family:'JetBrains Mono', monospace;
+  font-size:15px;
+  outline:none;
+  transition:border-color .2s;
+}
+input[type="text"]:focus{
+  border-color:var(--purple); box-shadow:0 0 0 3px rgba(155,92,255,.08), 0 0 18px rgba(109,53,255,.12);
+}
+button{
+  width:100%;
+  margin-top:16px;
+  padding:14px 16px;
+  border:1px solid rgba(190,151,255,.22);
+  border-radius:12px;
+  background:linear-gradient(100deg, var(--purple-2), var(--purple), var(--blue));
+  color:#fff;
+  box-shadow:0 10px 28px rgba(109,53,255,.24), inset 0 1px 0 rgba(255,255,255,.18);
+  font-family:'Space Grotesk', sans-serif;
+  font-weight:700;
+  font-size:15px;
+  letter-spacing:.03em;
+  cursor:pointer;
+  transition:transform .15s, opacity .15s;
+}
+button:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(109,53,255,.34),0 0 18px rgba(37,167,255,.12);}
+button:disabled{opacity:.55;cursor:not-allowed;transform:none;}
+.result{
+  margin-top:26px;
+  border-top:1px dashed var(--line);
+  padding-top:22px;
+  text-align:center;
+  display:none;
+}
+.result.show{display:block;}
+.result .label{
+  color:var(--muted);
+  font-size:12px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+.code{
+  font-family:'JetBrains Mono', monospace;
+  font-size:34px;
+  font-weight:700;
+  letter-spacing:.12em;
+  color:#b991ff; text-shadow:0 0 14px rgba(155,92,255,.42);
+  word-break:break-all;
+𝐤𝐬}.                                       𝐤𝐬
+.status{
+  margin-top:14px;
+  font-size:13px;
+  color:var(--muted);
+}
+.status.err{color:var(--err);}
+.status.ok{color:var(--ok);}
+.steps{
+  margin-top:22px;
+  font-size:12.5px;
+  color:var(--muted);
+  line-height:1.7;
+}
+.steps b{color:var(--text);}
+footer{
+  text-align:center;
+  margin-top:26px;
+  font-size:11.5px;
+  color:#68618a;
+  letter-spacing:.08em;
+}
+footer span{
+  color:#8f5cff;
+  text-shadow:0 0 8px rgba(155,92,255,.7);
+}
+footer a{color:#9f83d8;text-decoration:none;}
+.links-row{display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap;}
+.links-row a{
+  display:flex;align-items:center;gap:6px;
+  padding:8px 14px;border:1px solid var(--line);border-radius:999px;
+  color:var(--text);text-decoration:none;font-size:12px;
+  background:rgba(155,92,255,.06);transition:all .25s ease;
+}
+.links-row a:hover{border-color:#9b5cff;box-shadow:0 0 12px rgba(155,92,255,.35);}
+</style>
+</head>
+<body>
+
+<div class="sky" id="sky"></div>
+
+<div class="card">
+  <div class="royal-mark" aria-hidden="true"><div class="crown">♛</div><div class="royal-line"></div></div>
+  <h1>KING&#8209;MD</h1>
+  <p class="tagline">Associez votre numéro WhatsApp à votre bot</p>
+
+  <label for="number">Numéro WhatsApp</label>
+  <div class="input-row">
+    <input type="text" id="number" placeholder="ex. 50912345678 (indicatif pays, sans + ni espaces)" autocomplete="off" />
+  </div>
+  <button id="pairBtn" onclick="requestCode()">Générer le code d’association</button>
+
+  <div class="result" id="result">
+    <div class="label">Votre code d’association</div>
+    <div class="code" id="code">— — — —</div>
+  </div>
+
+  <div class="status" id="status"></div>
+
+  <div class="steps">
+    1. Ouvrez WhatsApp &rarr; <b>Paramètres &rarr; Appareils connectés</b><br/>
+    2. Appuyez sur <b>connecter un appareil &rarr; connecter plutôt avec un numéro de téléphone</b><br/>
+    3. Entrez le code affiché ci-dessus avant son expiration
+  </div>
+
+  <div class="links-row">
+    <a href="https://whatsapp.com/channel/0029VbCY0ob7YSd0Oc9d650O" target="_blank">📢 Chaîne</a>
+    <a href="https://chat.whatsapp.com/I8U8Dkbgm760s8QTDoDZnO?s=sw&p=a&mlu=4&ilr=4&iam=2" target="_blank">💬 Groupe</a>
+    <a href="https://t.me/king_stark821" target="_blank">✈️ Telegram</a>
+    <a href="https://king-generator-ai.lovable.app/" target="_blank">🤖 KING GENERATOR</a>
+  </div>
+  
+  <footer>𝐊𝐈𝐍𝐆-𝐌𝐃 <span>•</span> 𝐛𝐲 𝐊𝐈𝐍𝐆 𝑺𝑻𝑨𝑹𝑲</footer>
+</div>
+
+<script>
+(function stars(){
+  const sky = document.getElementById('sky');
+  const count = 60;
+  for(let i=0;i<count;i++){
+    const s = document.createElement('span');
+    s.style.left = Math.random()*100+'vw';
+    s.style.top = Math.random()*100+'vh';
+    s.style.animationDelay = (Math.random()*4)+'s';
+    sky.appendChild(s);
+  }
+})();
+
+async function requestCode(){
+  const numberInput = document.getElementById('number');
+  const btn = document.getElementById('pairBtn');
+  const result = document.getElementById('result');
+  const codeEl = document.getElementById('code');
+  const statusEl = document.getElementById('status');
+
+  const number = numberInput.value.replace(/[^0-9]/g, '');
+  statusEl.className = 'status';
+  statusEl.textContent = '';
+
+  if(!number){
+    statusEl.className = 'status err';
+    statusEl.textContent = 'Entrez un numéro valide avec l’indicatif du pays.';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Génération en cours...';
+  result.classList.remove('show');
+
+  try{
+    const res = await fetch('/code?number=' + encodeURIComponent(number));
+    const data = await res.json();
+
+    if(!res.ok){
+      statusEl.className = 'status err';
+      statusEl.textContent = data.message || data.error || 'Une erreur est survenue. Réessayez.';
+    }else if(data.status === 'already_connected'){
+      statusEl.className = 'status ok';
+      statusEl.textContent = data.message;
+    }else if(data.code){
+      codeEl.textContent = data.code;
+      result.classList.add('show');
+      statusEl.className = 'status ok';
+      statusEl.textContent = 'Code généré. Il expire bientôt, utilisez-le rapidement.';
+    }else{
+      statusEl.className = 'status err';
+      statusEl.textContent = 'Aucun code reçu. Réessayez dans un instant.';
+    }
+  }catch(err){
+    statusEl.className = 'status err';
+    statusEl.textContent = 'Impossible de contacter le serveur. Réessayez.';
+  }finally{
+    btn.disabled = false;
+    btn.textContent = 'Générer le code d’association';
+  }
+𝐤𝐬}𝐤𝐬
+</script>
+
+</body/>
+</html>
